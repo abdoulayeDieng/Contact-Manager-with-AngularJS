@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="contactApp">
+	<head>
+		<title>Liste des contacts</title>
+		<meta charset="utf-8" >
+		<script src="js/angular.js" ></script>
+		<script src="js/main.js" ></script>
+	</head>
+	<body ng-controller="contactCtrl">
+	  <section id="list">
+	  	<h2>Liste des contacts</h2>
+	    <ul class="contactlist">
+	       <li ng-repeat="contact in contacts track by contact.id"><a href="#" title="Editez ses coordonnées" ng-click="details(contact.id)">{{contact.nom+' '+contact.prenom}}</a></li>
+	    </ul>
+	    <p><button ng-click="add_view()" ng-hide="add_view_show">Ajoutez un contact</button></p>
+	  </section>
+
+	  <section ng-show="add_view_show">
+	    <h2>Formulaire d'ajout d'un contact</h2>
+	  	<p>
+	  	   <input ng-model="contact.nom" placeholder="Nom du contact" autofocus="true">
+	  	   <br><input ng-model="contact.prenom" placeholder="Prénom du contact">	
+	  	   <br><input ng-model="contact.phone" placeholder="Téléphone du contact">	
+	  	   <br><input ng-model="contact.email" type="email" placeholder="Email du contact">
+	  	 </p> 
+	  	 <p> 
+	  	     <button ng-click="add(contact)">Ajoutez le contact</button> &nbsp;&nbsp;<button ng-click="add_view_show = false">Annulez</button>
+	  	 </p>
+	  </section>
+
+	  <section ng-show="details_view_show">
+	    <h2>Coordonnées d'un contact</h2>
+	  	<p>
+	  	   <label for="nom">Nom : </label> <input id="nom" ng-model="new_contact.nom" required>
+	  	   <br><label for="prenom">Prénom : </label><input id="prenom" ng-model="new_contact.prenom" required>	
+	  	   <br><label for="phone">Telephone : </label><input id="phone" ng-model="new_contact.phone" required>	
+	  	   <br><label for="email">Email : </label><input id="email" ng-model="new_contact.email" type="email" required>
+	  	   <input type="hidden" ng-model="selected_id">
+	  	</p>
+	  	<p><button ng-click="update()">Enregistrez les modifications</button> &nbsp;&nbsp;<button ng-click="remove()">Supprimez le contact</button>&nbsp;&nbsp;<button ng-click="details_view_show = false">Annulez</button></p>
+	  </section>
+
+	</body>
+</html>
